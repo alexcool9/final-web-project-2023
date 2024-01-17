@@ -14,7 +14,7 @@ const Register = () => {
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
-    const [username, setUsername] = useState('')
+    const [isBusiness, setIsBusiness] = useState(false)
     const [password, setPassword] = useState('')
     // const [message, setMessage] = useState('')
     const [errors, setErrors] = useState([])
@@ -24,7 +24,6 @@ const Register = () => {
     }
 
     const clearInput = () => {
-        setUsername('')
         setPassword('')
     }
 
@@ -32,6 +31,7 @@ const Register = () => {
         e.preventDefault();
         document.getElementById('submitBtn').disabled = true;
         document.getElementById('submitBtn').innerHTML = 'Loading...';
+
         let fData = {
             name: {
                 first: firstName,
@@ -41,19 +41,7 @@ const Register = () => {
             phone: phone,
             email: email,
             password: password,
-            // "address": {
-            //     "state": "",
-            //     "country": "Israel",
-            //     "city": "Ashkelon",
-            //     "street": "Pokemon",
-            //     "zip": 0,
-            //     "houseNumber": "33"
-            // },
-            // "image": {
-            //     "url": "",
-            //     "alt": ""
-            // },
-            isBusiness: true
+            isBusiness: isBusiness
         };
 
         axios({
@@ -63,7 +51,7 @@ const Register = () => {
         })
         .then(function (response) {
             document.getElementById('submitBtn').disabled = false;
-            document.getElementById('submitBtn').innerHTML = 'Sign in';
+            document.getElementById('submitBtn').innerHTML = 'Sign Up';
 
             clearInput()
 
@@ -78,7 +66,7 @@ const Register = () => {
         })
         .catch(function (error) {
             document.getElementById('submitBtn').disabled = false;
-            document.getElementById('submitBtn').innerHTML = 'send message';
+            document.getElementById('submitBtn').innerHTML = 'Sign Up';
 
             //handle error
             const { response } = error;
@@ -90,7 +78,6 @@ const Register = () => {
                 );
             }
             if(response !== null) { // if(response.data.errors !== null) {\
-                console.log('response -----', error);
                 setErrors(response.data.errors)
             }
             
@@ -185,6 +172,18 @@ const Register = () => {
                                     {errors && 
                                         <p className="text-red-500 text-sm">{errors}</p>
                                     }
+                                </div>
+
+                                <div className="flex items-center my-4">
+                                    <input 
+                                        id="isBusiness" 
+                                        aria-describedby="checkbox-1" 
+                                        type="checkbox" 
+                                        className="bg-gray-50 border-gray-300 focus:ring-3 focus:ring-blue-300 h-4 w-4 rounded"
+                                        value={isBusiness}
+                                        onChange={(e)=> setIsBusiness(!isBusiness)}
+                                        />
+                                    <label htmlFor="checkbox-1" className="ml-3 text-lg font-medium text-gray-900">is Business User?</label>
                                 </div>
                                 
                                

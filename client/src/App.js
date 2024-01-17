@@ -53,7 +53,7 @@ function App() {
               <Route path="/contact" element={<Contact />} />
               <Route path="/about" element={<About />} />
               <Route path="/get-demo" element={<DemoProduct />} />
-              <Route path="/product-details" element={<ProductDetails />} />
+              <Route path="/products/:id" element={<ProductDetails />} />
             </Routes>
           </UserProvider>
         </ScrollToTop>

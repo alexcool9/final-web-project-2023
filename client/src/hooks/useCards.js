@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { changeLikeStatus, createCard, deleteCard, getCard, getCards, getMyCards, updateCard } from "../services/cardApiService";
 import useAxios from "./useAxios";
-// import { useSnackbar } from "../../providers/SnackbarProvider";
-// import normalizeCard from "../helpers/normalization/normalizeCard";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useUser } from "./../users/providers/UserProvider";
+import Notiflix from 'notiflix';
+
 
 const useCards = () => {
     const [cards, setCards] = useState(null);
@@ -94,7 +94,11 @@ const useCards = () => {
         try {
             setPending(true);
             await deleteCard(cardId);
-            alert("Card deleted successfully", "success");
+            Notiflix.Report.success(
+                'Success',
+                'Card deleted successfully',
+                'Okay',
+            );
         } catch (error) {
             requestStatus(false, error, null);
         }

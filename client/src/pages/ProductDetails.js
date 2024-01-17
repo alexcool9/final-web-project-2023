@@ -1,19 +1,26 @@
-import React from 'react';
-import Clients from '../components/Clients';
-import Cta from '../components/Cta';
+import React, {useEffect} from 'react';
 import Footer from '../components/Footer';
-import Hero from '../components/Hero';
-import Intro from '../components/Intro';
-import Portfolio from '../components/Portfolio';
-import Services from '../components/Services';
+import ProductInfo from '../components/ProductInfo';
 import NavBar from '../components/Navbar/NavBar';
+import useCards from './../hooks/useCards';
+import { useParams } from "react-router-dom";
 
 
 const ProductDetails = () => {
+    const { value, handleGetCard } = useCards();
+    const { card, error } = value;
+    const { id } = useParams();
+
+    useEffect(() => {
+        handleGetCard(id);
+    }, []);
+
     return (
         <>
             <NavBar />
-            <Services />
+            <ProductInfo
+                card={card}
+            />            
             <Footer />
         </>
 

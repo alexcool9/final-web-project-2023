@@ -14,41 +14,16 @@ let cardSchema = new Schema({
     description: {
         type: String
     },
-    imageAlt: {
+    imgUrl: {
         type: String
     },
-    state: {
-        type: String
-    },
-    country: {
-        type: String
-    },
-    city: {
-        type: String
-    },
-    zip: {
+    price: {
         type: Number
-    },
-    houseNumber: {
-        type: Number
-    },
-    phone: {
-        type: String
-    },
-    email: {
-        type: String
-    },
-    webUrl: {
-        type: String
-    },
-    imageUrl: {
-        type: String
     },
     likes: {
         type: Array,
         default: []
-    },
-    address:{}
+    }
 
 }, {
         collection: 'cards'
